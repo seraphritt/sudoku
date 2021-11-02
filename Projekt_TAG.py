@@ -5,7 +5,7 @@ import random
 import copy
 
 
-def find_blank(matrix):
+def find_blank(matrix):     # acha um espaço vazio
     for k in range(9):
         for y in range(9):
             if getkeys(matrix[k][y]) == 0:
@@ -15,8 +15,8 @@ def find_blank(matrix):
     return -1, -1
 
 
-def ispossible(i, j, valor, matriz):
-    print(f"I: {i}, J: {j}")
+def ispossible(i, j, valor, matriz):    # checa se um valor é possível para determinado espaço vazio do sudoku
+    print(f"Analisando linha I: {i} e coluna J: {j}")
     for k in range(20):     # numero de vizinhos de um vertice
         if matriz[i][j][getkeys(matriz[i][j])][k] == valor:
             return False
@@ -41,86 +41,25 @@ def sudoku_print(matriz):
             contador += 1
 
 
-# def graph_neighbors_block(matriz_de_vertices):    # define quais são os vizinhos por meio do conceito de linha e coluna
-#     # vertices que estão na mesma linha ou coluna são adjacentes
-#     for k in range(0, 7, 3):
-#         for m in range(0, 7, 3):
-#             for i in range(9):
-#                 for j in range(9):
-#                     if i == 0 + k and j == 0 + m:
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])] = []
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i][j+1]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i][j+2]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i+1][j]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i+2][j]))
-#                     if i == 0 + k and j == 1 + m:
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])] = []
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i][j-1]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i][j+1]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i+1][j]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i+2][j]))
-#                     if i == 0 + k and j == 2 + m:
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])] = []
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i][j-1]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i][j-2]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i+1][j]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i+2][j]))
-#                     if i == 1 + k and j == 0 + m:
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])] = []
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i][j+1]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i][j+2]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i-1][j]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i+1][j]))
-#                     if i == 1 + k and j == 1 + m:
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])] = []
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i][j-1]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i][j+1]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i-1][j]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i+1][j]))
-#                     if i == 1 + k and j == 2 + m:
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])] = []
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i][j-1]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i][j-2]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i-1][j]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i+1][j]))
-#                     if i == 2 + k and j == 0 + m:
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])] = []
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i][j+1]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i][j+2]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i-1][j]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i-2][j]))
-#                     if i == 2 + k and j == 1 + m:
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])] = []
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i][j-1]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i][j+1]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i-1][j]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i-2][j]))
-#                     if i == 2 + k and j == 2 + m:
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])] = []
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i][j-1]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i][j-2]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i-1][j]))
-#                         matriz_de_vertices[i][j][getkeys(matriz_de_vertices[i][j])].append(getkeys(matriz_de_vertices[i-2][j]))
-
-
 def criar_vetor():
     vetor_de_valores = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     return vetor_de_valores
 
 
-def sudoku_initiate():
+def sudoku_initiate(matriz_sudoku=None):
+    if matriz_sudoku is None:
+        matriz_sudoku = [
+            [{0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}],
+            [{0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}],
+            [{0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}],
+            [{0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}],
+            [{0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}],
+            [{0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}],
+            [{0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}],
+            [{0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}],
+            [{0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}, {0: []}]
+        ]
     vertex = []
-    matriz_sudoku = [
-        [{7: []}, {8: []}, {0: []}, {4: []}, {0: []}, {0: []}, {1: []}, {2: []}, {0: []}],
-        [{6: []}, {0: []}, {0: []}, {0: []}, {7: []}, {5: []}, {0: []}, {0: []}, {9: []}],
-        [{0: []}, {0: []}, {0: []}, {6: []}, {0: []}, {1: []}, {0: []}, {7: []}, {8: []}],
-        [{0: []}, {0: []}, {7: []}, {0: []}, {4: []}, {0: []}, {2: []}, {6: []}, {0: []}],
-        [{0: []}, {0: []}, {1: []}, {0: []}, {5: []}, {0: []}, {9: []}, {3: []}, {0: []}],
-        [{9: []}, {0: []}, {4: []}, {0: []}, {6: []}, {0: []}, {0: []}, {0: []}, {5: []}],
-        [{0: []}, {7: []}, {0: []}, {3: []}, {0: []}, {0: []}, {0: []}, {1: []}, {2: []}],
-        [{1: []}, {2: []}, {0: []}, {0: []}, {0: []}, {7: []}, {4: []}, {0: []}, {0: []}],
-        [{0: []}, {4: []}, {9: []}, {2: []}, {0: []}, {6: []}, {0: []}, {0: []}, {7: []}]
-    ]
     for i in range(9):
         vertex.append([])
     for a in range(9):
@@ -129,17 +68,21 @@ def sudoku_initiate():
     return vertex
 
 
-def solvesudoku(matrix, i=0, j=0):      # adaptação do código que pode ser encontrado no endereço
+def solvesudoku(matrix, i=0, j=0):
+    # adaptação do código que pode ser encontrado no endereço
     # https://stackoverflow.com/questions/1697334/algorithm-for-solving-sudoku
+    # foi usado como base o algoritmo de Welsh Powell para coloração de grafos
+    # mas com adaptações e com o uso de backtracking para definir a solução única do sudoku
+    global new_matrix
     new_matrix = []
     for r in range(9):
         new_matrix.append([])
     i, j = find_blank(matrix)
-    if i == 3 and j == 8:
-        print("uhum")
     if i == -1 and j == -1:
         return True
-    for e in range(1, 10):
+    ll = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    random.shuffle(ll)
+    for e in ll:
         if ispossible(i, j, e, matrix):
             old_key = getkeys(matrix[i][j])
             matrix[i][j][e] = matrix[i][j].pop(old_key)
@@ -149,10 +92,13 @@ def solvesudoku(matrix, i=0, j=0):      # adaptação do código que pode ser en
             for a in range(9):
                 for b in range(9):
                     new_matrix[a].append(graph_neighbors_block(matrix[a][b], a, b, matrix))
+            print("--------------PASSO DA SOLUÇÃO--------------\n\n")
             sudoku_print(new_matrix)
+            i, j = find_blank(matrix)
+            if i == -1 and j == -1:     # significa que não existe espaço para ser preenchido
+                return True
             if solvesudoku(new_matrix, i, j):
                 return True
-            # Undo the current cell for backtracking
             old_key = getkeys(matrix[i][j])
             matrix[i][j][0] = matrix[i][j].pop(old_key)
             new_matrix = []
@@ -165,30 +111,54 @@ def solvesudoku(matrix, i=0, j=0):      # adaptação do código que pode ser en
     return False
 
 
-# def sudoku_solve(matriz, i=0, j=0):   # utiliza-se o algoritmo Welsh Powell (greedy graph coloring algorithm) com backtracking
-#     new_matrix = []
-#     for i in range(9):
-#         new_matrix.append([])
-#     available_colors = criar_vetor()
-#     if getkeys(matriz[i][j]) == 0:
-#             for k in available_colors:
-#                     if ispossible(i, j, k, matriz):
-#                         # print("------------------------------------\n\n")
-#                         # sudoku_print(matriz)
-#                         # print(matriz)
-#                         old_key = getkeys(matriz[i][j])
-#                         matriz[i][j][k] = matriz[i][j].pop(old_key)
-#                         for a in range(9):
-#                             for b in range(9):
-#                                 new_matrix[a].append(graph_neighbors_block(matriz[a][b], a, b, matriz))
-#                         if sudoku_solve(new_matrix):
-#                             return True
-#                         matriz[i][j][getkeys(matriz[i][j])] = 0
-#
-#     return False
+def create_sudoku(matrix, i=0, j=0):
+    # o método para criar um sudoku válido foi: solucionar um sudoku de tabuleiro vazio (todos números = 0)
+    # e apagar randômicamente algumas posições do sudoku, nesse caso 30 posições aleatórias
+    global new_matrix
+    new_matrix = []
+    for r in range(9):
+        new_matrix.append([])
+    i, j = find_blank(matrix)
+    if i == -1 and j == -1:
+        return True
+    ll = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    random.shuffle(ll)
+    for e in ll:
+        if ispossible(i, j, e, matrix):
+            old_key = getkeys(matrix[i][j])
+            matrix[i][j][e] = matrix[i][j].pop(old_key)
+            new_matrix = []
+            for r in range(9):
+                new_matrix.append([])
+            for a in range(9):
+                for b in range(9):
+                    new_matrix[a].append(graph_neighbors_block(matrix[a][b], a, b, matrix))
+            i, j = find_blank(matrix)
+            if i == -1 and j == -1:
+                ll.remove(9)
+                ll.append(0)
+                for i in range(30):     # apaga 30 posições aleatórias do sudoku
+                    w = random.choice(ll)
+                    x = random.choice(ll)
+                    odd_k = getkeys(new_matrix[w][x])
+                    new_matrix[w][x][0] = new_matrix[w][x].pop(odd_k)
+                sudoku_print(new_matrix)
+                return True
+            if create_sudoku(new_matrix, i, j):
+                return True
+            old_key = getkeys(matrix[i][j])
+            matrix[i][j][0] = matrix[i][j].pop(old_key)
+            new_matrix = []
+            for r in range(9):
+                new_matrix.append([])
+            for a in range(9):
+                for b in range(9):
+                    new_matrix[a].append(graph_neighbors_block(matrix[a][b], a, b, matrix))
+            matrix = copy.deepcopy(new_matrix)
+    return False
 
 
-def graph_neighbors_block(vertice, i, j, matrix):    # vai ser a função q gera a lista de adj
+def graph_neighbors_block(vertice, i, j, matrix):    # acha os vizinhos de um vértice no grafo
     find = False
     matrix2 = copy.deepcopy(matrix)
     matrix2[i].pop(j)
@@ -271,10 +241,11 @@ def graph_neighbors_block(vertice, i, j, matrix):    # vai ser a função q gera
 
 
 sudoku = sudoku_initiate()
-print(sudoku)
-sudoku_print(sudoku)
-print("\n\n*************")
-print("SOLVED SUDOKU")
-print("*************\n\n")
-print(solvesudoku(sudoku))
-#
+create_sudoku(sudoku)
+print("\n**Sudoku randômico gerado com sucesso**")
+new_matrix = sudoku_initiate(new_matrix)
+input("\n\n"
+      "**Pressione qualquer tecla e aperte ENTER para ver a solução do Sudoku passo a passo**"
+      "\n\n")
+solvesudoku(new_matrix)
+print("\n**Essa é a solução passo a passo do Sudoku**\n\n")
