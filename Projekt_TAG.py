@@ -113,7 +113,7 @@ def solvesudoku(matrix, i=0, j=0):
 
 def create_sudoku(matrix, i=0, j=0):
     # o método para criar um sudoku válido foi: solucionar um sudoku de tabuleiro vazio (todos números = 0)
-    # e apagar randômicamente algumas posições do sudoku, nesse caso 15 posições aleatórias
+    # e apagar randômicamente algumas posições do sudoku, nesse caso 30 posições aleatórias
     global new_matrix
     new_matrix = []
     for r in range(9):
@@ -137,7 +137,7 @@ def create_sudoku(matrix, i=0, j=0):
             if i == -1 and j == -1:
                 ll.remove(9)
                 ll.append(0)
-                for i in range(15):     # apaga 15 posições aleatórias do sudoku
+                for i in range(30):     # apaga 30 posições aleatórias do sudoku
                     w = random.choice(ll)
                     x = random.choice(ll)
                     odd_k = getkeys(new_matrix[w][x])
@@ -249,4 +249,3 @@ input("\n\n"
       "\n\n")
 solvesudoku(new_matrix)
 print("\n**Essa é a solução passo a passo do Sudoku**\n\n")
-
