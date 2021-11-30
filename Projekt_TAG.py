@@ -1,6 +1,4 @@
-# Codigo feito por: Isaque Augusto da Silva Santos, Matricula: 190089245
-# Projeto 3 de Teoria e Aplicação de Grafos, Turma A, 2021/1
-# Prof. Dibio
+# Codigo feito por: Isaque Augusto da Silva Santos (seraphritt)
 import random
 import copy
 
